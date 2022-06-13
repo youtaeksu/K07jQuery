@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+        $(function(){
+            /*
+            each() : 선택자를 통해 얻어온 엘리먼트의 갯수만큼 반복해주는 함수.
+                반복할때 index는 0부터 자동으로 증가하고 필요없는 경우에는 생략 가능하다.
+            attr() : DOM객체의 속성에 속성값을 부여하거나 속성을 읽어올때 사용하는 함수.
+                아래 코드는 id속성과 style속성을 동시에 부여한다.
+            */
+            $('#btn1').click(function(){
+                $('div').each(function(index){
+                    /*
+                    매개변수 index로 전달되는 0부터 2까지의 정수를 div태그의 id속성값으로
+                    부여하고, 동시에 style속성을 변경한다. 실행후 div태그는 div0~div2까지의
+                    아이디를 부여받게 된다.
+                    */
+                    $(this).attr({'id':'div'+index,
+                        style:'border:1px solid red; width:100px; height:100px'
+                    });
+                });
+            });
+            /*
+            btn1을 클릭하여 id속성값을 부여하기 전에는 해당 버튼을 눌러도 아무런 
+            값도 출력되지 않는다.
+            */
+            $('#btn2').click(function(){
+                alert($('#div1').text());
+            });
+        });
+    </script>
+    <title>JQ13Each.jsp</title>
+</head>
+<body>
+    <h2>each() 메소드</h2>
+	
+	<div>index:0 -> div1</div>
+	<div>index:1 -> div2</div>
+	<div>index:2 -> div3</div>
+	
+	<button id="btn1">div에 style적용하기</button>
+	<button id="btn2">index1의 text()</button>
+</body>
+</html>

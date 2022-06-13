@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function(){
+        /*
+        hover() : 선택한 엘리먼트에 마우스를 올렸을때, 내렸을때의 효과를 부여한다.
+        */
+        $("img").hover(
+            //첫번째인자 : 마우스 오버시 실행할 함수
+            function(){
+                /*
+                css() 사용시 JSON 객체를 통해 속성을 부여할 수 있다.
+                객체형식이며 각 key에 value가 매칭된 형식이다.
+                Java의 Map컬렉션과 비슷한 형태이다.
+                */
+                $(this).css({'width':'300px'
+                    ,'height':'400px'
+                    ,'border':'3px solid black'});
+            } ,
+            //두번째인자 : 마우스 아웃시..
+            function(){
+                //메서드체인으로 여러 스타일을 적용한다.
+                $(this).css("width","100px")
+                    .css("height","150px")
+                    .css("border","5px dotted yellow")
+            }
+        );
+    });
+    </script>
+</head>
+<body>
+    <h2>hover() 메소드</h2>
+	
+	<h3>마우스 오버/아웃으로 이미지크기 조절하기</h3>
+	
+	<img src="../images/7.jpg" alt="행운의7" />
+</body>
+</html>

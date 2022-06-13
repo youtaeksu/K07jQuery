@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+    /*
+    prev() : 선택한 엘리먼트의 이전 요소를 선택한다.
+    next() : 다음 요소를 선택한다.
+    */
+    $(function(){
+        //button태그 중 id가 next인 엘리먼트 선택
+        $('button#next').click(function(){
+            //li태그 중 class가 third인 엘리먼트의 이전과 다음 요소에 스타일을 적용한다.
+            $('li.third').prev().css("backgroundColor","blue");
+            $('li.third').next().css("fontSize","2em");
+        });
+
+        $('button#prev').click(function(){
+            $('li.third').prev().css("backgroundColor","yellow");
+            $('li.third').next().css("fontSize","1.2em");
+        });
+
+        /*
+        eq() : 선택한 엘리먼트가 2개 이상일때 인덱스를 통해 엘리먼트를 선택한다.
+        */
+        //인덱스로 사용할 변수
+        var i=0;
+        //<li>태그의 갯수
+        var size = $("li").length;
+        $('button#continue').click(function(){
+            //현재 선택된 엘리먼트 이전 요소의 배경을 흰색으로 변경한다.
+            $('li').eq(i).prev().css('backgroundColor','white');
+            //현재 선택된 엘리먼트의 배경을 노란색으로 변경한다.
+            $('li').eq(i).css('backgroundColor','yellow');
+            //i값이 0이라면 이전 요소가 없으므로 마지막 요소를 선택하여 배경을 흰색으로 변경한다.
+            if(i==0){
+                //size는 5이므로 4번인덱스를 선택한다.
+                $('li').eq(size-1).css('backgroundColor','white');
+            }
+
+            //<li>태그의 끝까지 index가 증가하면 처음으로 되돌리기 위해 0으로 초기화한다.
+            if(size-1 == i){
+                i=0;
+            }
+            else{
+                i++;
+            }
+        });
+    });
+    </script>
+</head>
+<body>
+    <h2>next() / prev() 메소드</h2>
+	
+	<button id="next">JSP의 다음요소 얻어오기</button>
+	<button id="prev">JSP의 이전요소 얻어오기</button>
+	<button id="continue">연속해서 배경색 바꾸기</button>
+	
+	<ul>
+		<li>JAVA</li> 0번인덱스
+		<li>HTML5</li>
+		<li class="third">JSP->여기가third</li>
+		<li>jQuery</li>
+		<li>Spring</li> 4번인덱스
+	</ul>
+</body>
+</html>

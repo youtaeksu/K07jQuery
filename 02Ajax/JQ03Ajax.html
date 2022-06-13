@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+    /*
+        $.ajax()
+            : jQuery에서 사용되는 Ajax관련 함수로 load(), get(), post()함수의 모든
+            기능을 가지고있다. 그러므로 가장 활용빈도가 높다.
+            별도의 인자가 존재하지 않고, JSON형태의 인자 하나만 사용한다.
+
+            인자의 속성
+                url : 요청할 서버의 경로
+                type : 전송방식. get, post
+                dataType : 콜백 데이터의 형식 지정. json, xml, script, text, html 등
+                success : 요청 성공시 호출되는 콜백함수
+                error : 요청 실패시 호출되는 콜백함수
+                contentType : 전송시 사용할 컨텐츠 타입(get 혹은 post에 따라 달라짐)
+                data : 요청시 사용할 파라미터. JSON형식으로 기술한다.
+    */
+    $(function(){
+        /*
+        해당 호출은 버튼을 눌렀을때 JS파일의 내용을 읽어 현재 문서로 로드한다.
+        즉 load() 함수와 동일한 역활로 사용되었다.
+        */
+        $('#ajaxBtn').click(function(){
+            // $.ajax({
+            //     //해당 js파일로 get방식을 통해 요청한다.
+            //     url : './common/03JsData.js',
+            //     type : 'get',
+            //     //콜백데이터는 Javascript형식으로 받을것임을 명시한다.
+            //     dataType : "script",
+            //     //요청에 성공한 경우 호출될 콜백함수
+            //     success : function(resData){
+            //         //매개변수 resData로 js파일의 모든 내용이 전달된다.
+            //         //즉, MyAlert()함수가 해당문서에 로드된다.
+            //         MyAlert("Hello", "AJAX");
+            //         //콜백받은 내용을 현재 문서에서 출력한다.
+            //         $('#ajaxDisplay').html(resData);
+            //     },
+            //     //요청에 실패한 경우 호출될 콜백함수
+            //     error : function(errDate){
+            //         //발생된 에러를 매개변수로 전달해준다.
+            //         console.log(errDate.state, errDate.statusText);
+            //     },
+            // });
+
+            /*
+                콜백함수 정의방법
+                방법1 : success 항목에 무기명함수로 정의한다.
+                    형식] success : function(매개변수){ 실행부 }
+                방법2 : jQuery외부에 Javascript함수로 정의한다.
+                    형식] success : 함수명
+                    JS함수는 일반적인 형식으로 생성하면 된다.
+                    단, 함수명을 명시할때 함수명()와 같이 쓰지않는다.
+            */
+
+            $.ajax({
+                url : './common/03JsData.js',
+                type : 'get',
+                dataType : "script",
+                success : sucFunc ,
+                error : function(errDate){
+                    console.log(errDate.state, errDate.statusText);
+                },
+            });
+        });
+    });
+
+
+    /*
+    콜백함수는 jQuery외부에 Javascript함수로 정의한 후 호출할 수 있다.
+    사용시에는 success:함수명 과 같이 기술한다.
+    */
+    function sucFunc(resData){
+        alert("$.ajax()메소드 요청성공");
+        $('#ajaxDisplay').html(resData);
+    }
+    </script>
+</head>
+<body>
+    <h2>$.ajax() 메소드 사용하기</h2>
+
+    <button id="ajaxBtn">ajax()메소드실행하기</button>
+
+    <div id="ajaxDisplay">
+        ajax결과를 여기에 디스플레이
+    </div>
+</body>
+</html>

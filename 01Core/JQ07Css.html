@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function(){
+        /*
+        css() : 엘리먼트의 스타일을 설정한다.
+            방법1 : 매개변수1,2를 통해 속성과 값을 설정한다.
+                $(셀렉터).css('속성1','값1').css('속성2','값2')....
+                메서드 체인 형태로 계속 연결할 수 있다.
+            방법2 : JSON객체 형태로 여러개의 속성을 부여한다.
+                $(셀렉터).css({'속성1','값1', ... 속성N})
+            만약 엘리먼트의 css속성을 읽어와야 한다면 속성만 기술하면 된다.
+                var attr = $(셀렉터).css('읽어올속성');
+                
+        each() : 선택한 엘리먼트의 갯수만큼 자동으로 반복하는 함수로
+            아래는 div태그선택자를 통해 얻어온 엘리먼트가 2개이므로 2번 반복실행된다.
+        */
+        //해당 문서가 로드되면 즉시 실행된다.
+        $('div').each(function(index){
+            //선택된 엘리먼트의 순서대로 인덱스가 전달된다. 0부터 시작한다.
+            console.log("index", index);
+            //기사가 입력된 부분의 스타일을 변경한다.
+            $(this).css({'width':'500px','height':'200px'
+                ,'border':'solid red 2px'});
+        });
+        //button 태그셀렉터를 통해 문서의 모든 버튼을 선택한다.
+        $('button').click(function(){
+            //기사 부분의 폰트사이즈를 읽어와서 숫자로 변경한다.
+            var size = parseInt($("#article1").css("fontSize"));
+            /*
+            text() : JS의 innerText와 동일한 기능의 함수로 태그 사이의
+                컨텐츠를 텍스트형식으로 읽어온다.
+            */
+            if($(this).text()=="기사늘리기"){
+                //폰트크기를 2px 증가시킨다.
+                size += 2;
+            }
+            else{
+                size -= 2;
+            }
+            //기사가 있는 부분의 폰트사이즈를 설정한다.
+            $('div').css("fontSize",size+"px");
+        });
+    });
+    </script>
+</head>
+<body>
+    <h2>css() 메소드</h2>
+	
+	<h3>뉴스기사 늘리기/줄이기</h3>
+	
+	<button id="big">기사늘리기</button>
+	<button id="small">기사줄이기</button>
+	
+	<div id="article1" style="font-size:12px;">
+		여기는 뉴스기사가 나와요 <br />
+		여기는 뉴스기사가 나와요 <br />
+		여기는 뉴스기사가 나와요 <br />
+	</div>	
+	<div id="article2" style="font-size:12px;">
+		여기도 뉴스기사가 나와요 <br />
+		여기도 뉴스기사가 나와요 <br />
+		여기도 뉴스기사가 나와요 <br />
+	</div>		
+</body>
+</html>

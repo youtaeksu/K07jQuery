@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+    $(function(){
+        /*
+        attr() : DOM객체에 속성을 부여하거나 얻어올때 사용
+            사용법1 : (셀렉터).attr('속성명','값') => 메서드체인 사용
+            사용법2 : (셀렉터).attr({'속성명':'값'}) => JSON 사용
+        removeAttr() : 속성을 제거할때 사용
+        */
+
+        //메서드 체인 방식으로 속성을 부여한다.
+        $('#btn1').click(function(){
+            //경로와 가로크기를 변경한다.
+            $('#viewImg').attr('src','../images/amazon.png')
+                .attr('width','300px');
+        });
+        //값 설정시 특정 조건에 따라 다른값을 부여할때 무기명함수를 사용할 수 있다.
+        $('#btn2').click(function(){
+            $('#viewImg').attr('src','../images/naver.png')
+                .attr('width',function(){return '200px'});
+        });
+        //JSON객체를 통해 2개이상의 값을 한꺼번에 설정한다.
+        $('#btn3').click(function(){
+            $('#viewImg').attr({'src':'../images/chosun.png'
+                    ,width:'400px'});
+        });
+        //속성제거하기
+        $('#btnDel').click(function(){
+            var attrName =
+                $('#attrSelect option:selected').val();
+            $('#viewImg').removeAttr(attrName);
+            alert(attrName +"속성이 제거됨");
+        });
+    });
+    </script>
+</head>
+<body>
+    <h2>attr(), removeAttr() 메서드</h2>
+	
+	<div>
+		<img src="../images/amazon.png" id="viewImg" alt="대체텍스트" />
+	</div>
+	
+	<div>
+		<button id="btn1">amazon.png이미지로변경</button>
+		<button id="btn2">naver.png이미지로변경</button>
+		<button id="btn3">chosun.png이미지로변경</button>
+	</div>
+	
+	<div>
+		<h3>위 변경 이미지를 먼저 누른후 속성제거 버튼을 누르시오</h3>
+		<select id="attrSelect">
+			<option value="src">src속성</option>
+			<option value="width">width속성</option>
+			<option value="alt">alt속성</option>
+		</select>
+		<button id="btnDel">속성제거</button>
+	</div>	
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+    /*
+        $.ajaxSetup()
+            : 동일하게 반복되는 $.ajax()의 인자를 설정하여 반복되는 인자의 사용을
+            생략할 수 있다. type, dataType등 기본적으로 사용되는 인자들을 묶어주면
+            중복적인 코드를 줄일 수 있다.
+    */
+    $(function(){
+        //현재 문서가 로드되면 요청URL, 콜백데이터 타입을 설정한다.
+        $.ajaxSetup({
+            url : "./common/04JSONData.json",
+            dataType : "json"
+        });
+        //앞에서 정의한 속성을 제외하고 함수를 정의한다.
+        $('#btn').click(function(){
+            $.ajax({
+                //요청에 성공했을때의 콜백 함수 정의
+                success : function(responseData){
+                    /*
+                    콜백데이터 responseData는 아래와 같은 JSON배열이다.
+                    [
+                        {"name":"홍길동","age":20,"주소":"서울시 금천구"},
+                        ....
+                    ]
+                    배열은 JSON객체로 구성되어 있어, 원소의 갯수만큼 each()함수를 통해
+                    반복할 수 있다.
+                    */
+                    $.each(responseData, function(index,value){
+                        /*
+                        each() : 함수 호출시 파라미터는 2가지를 사용할 수 있다.
+                            index : 반복시 사용할 인덱스로 0부터 시작한다.
+                            value : 해당 루프에서 반환되는 원소(혹은 데이터)
+                        */
+                        console.log(index, value);
+                        //JSON을 파싱할떄는 .(닷)과 [](대괄호) 두가지 형태를 사용할 수 있다.
+                        var htmlStr = "<tr>";
+                        htmlStr += " <td>"+(index+1)+"</td>";
+                        htmlStr += " <td>"+value.name+"</td>";
+                        htmlStr += " <td>"+value["age"]+"</td>";
+                        htmlStr += " <td>"+value["주소"]+"</td>";
+                        htmlStr += "    <tr>";
+
+                        //기존 내용의 뒷부분에 문자열을 추가한다.
+                        $('#tbl1').append(htmlStr);
+                        //여기서는 <table>태그 안쪽에 자식으로 추가해야 하므로 after()는 사용할수없다.
+                        // $('#tbl1').after(htmlStr);
+                    });
+                },
+                //실패했을때의 콜백함수는 외부에 JS함수로 선언했다. 호출시 함수명만 기술한다.
+                error:errFunc
+            });
+        });
+    });
+    /*
+    요청실패시 호출되는 콜백함수로 error항목에 함수명만 명시하면
+    호출시 매개변수가 자동으로 전달된다.
+    */
+    function errFunc(errData){
+        alert("실패:"+errData.status+":"+errData.statusText);
+    }
+    </script>
+</head>
+<body>
+    <div>
+        <h2>$.ajaxSetup() 메소드 사용하기</h2>
+
+        <table border="1" id="tbl1">
+            <tr>
+                <td>NO</td>
+                <td>이름</td>
+                <td>나이</td>
+                <td>출신지역</td>
+            </tr>
+            <!-- append()함수를 사용하면 여기에 추가된다. -->
+        </table>
+        <!-- after()함수를 사용하면 여기에 추가된다. -->
+        <button id="btn">JSON데이터 가져오기</button>
+    </div>
+</body>
+</html>

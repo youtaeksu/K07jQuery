@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+    $(function(){
+        $('#btn1').click(function(){
+            $("li").css("backgroundColor","white");
+            /*
+            sibling() : 선택된 엘리먼트 이외의 형제 원소 전체를 선택한다.
+                즉 여기서는 .third-item이외의 모든 형제 원소를 선택하여 배경색을
+                변경한다.
+            */
+            $("li.third-item").siblings().css("backgroundColor","red");
+        });
+        $('#btn2').click(function(){
+            $("li").css("backgroundColor","white");
+            /*
+            next() : 선택된 엘리먼트 뒤의 원소를 선택한다.
+                여기서는 '조통'만 선택된다.
+            */
+            $("li.third-item").next().css("backgroundColor","red");
+        });
+        $('#btn3').click(function(){
+            $("li").css("backgroundColor","white");
+            /*
+            nextAll() : 선택된 엘리먼트 뒤의 모든 원소를 선택한다.
+                '조통~함숨'까지 모두 선택된다.
+            */
+            $("li.third-item").nextAll().css("backgroundColor","red");
+        });
+        $('#btn4').click(function(){
+            $("li").css("backgroundColor","white");
+            /*
+            nextUntil(셀렉터) : 선택된 엘리먼트 뒤에 있는 요소들중 인자로 전달된
+                원소의 앞부분까지 선택한다.
+                즉 third-item에서 here 앞까지 선택한다.
+                조통, 황보항이 선택된다.
+            */
+            $("li.third-item").nextUntil('#here').css("backgroundColor","red");
+        });
+    });
+    /*
+    prev()
+    prevAll
+    preveUntil()
+    : next()와 동일한 역활의 함수로 선택한 엘리먼트 앞의 원소에 적용된다.
+    */
+    </script>
+</head>
+<body>
+    <ul>
+        <li>임준</li>
+        <li>오세재</li>
+        <li class="third-item">이인로</li>
+        <li>조통</li>
+        <li>황보항</li>
+        <li id="here">이담지</li>
+        <li>함순</li>
+    </ul>
+
+    <input type="button" value="siblings()" id="btn1">
+    <input type="button" value="next()" id="btn2">
+    <input type="button" value="nextAll()" id="btn3">
+    <input type="button" value="nextUntil()" id="btn4">
+</body>
+</html>

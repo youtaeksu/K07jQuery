@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+    $(function(){
+        //문서가 로드되면 내용 부분을 숨김처리한다.
+        $('.content').hide();
+        //제목 부분은 폰트크기와 마우스커서를 손가락으로 변경한다.
+        $('.title').css('fontSize','1.5em').css('cursor','pointer');
+
+        /*
+        slideToggle() : 주어진 시간만큼 슬라이드 업/다운이 토글된다.
+        slideUp() : 패널이 닫히는 효과
+        slideDown() : 패널이 열리는 효과
+        */
+        $('.title').click(function(){
+            //현재 선택한 엘리먼트 다음 요소에 슬라이드토글을 적용한다.
+            $(this).next().slideToggle(1000);
+        });
+        $('.s_up').click(function(){
+            //상수를 통한 시간설정. slow, fast, normal 3가지가 있다.
+            $('#panel').slideUp('slow');
+        });
+        $('.s_down').click(function(){
+            $('#panel').slideDown('fast');
+        });
+    });
+    </script>
+    <style>
+        div{
+            margin:10px;
+        }
+        #panel, #flip{
+            padding:5px; text-align:center;
+            background-color:#e5eecc;
+            border:1px solid #c3c3c3;
+        }
+        #pannel{
+            padding:50px;
+        }
+        .title{background-color: #ff99ff;}
+        .content{background-color: #ffff33;}
+    </style>
+</head>
+<body>
+    <h2>slideUp() / slideDown() / slideToggle() 메소드</h2>
+	
+	<div class="title">
+		제목1입니다.
+	</div>
+	<div class="content">
+		내용1입니다.<br/>
+		내용1입니다.<br/>
+		내용1입니다.<br/>
+		내용1입니다.<br/>
+	</div>	
+	
+	<div class="title">
+		제목2입니다.
+	</div>
+	<div class="content">
+		내용2입니다.<br/>
+		내용2입니다.<br/>
+		내용2입니다.<br/>
+		내용2입니다.<br/>
+	</div>
+	
+	<div class="title">
+		제목3입니다.
+	</div>
+	<div class="content">
+		내용3입니다.<br/>
+		내용3입니다.<br/>
+		내용3입니다.<br/>
+		내용3입니다.<br/>
+	</div>
+	
+	<div id="flip">
+		<button class="s_up">slideup()메소드</button>
+		<button class="s_down">slidedown()메소드</button>
+	</div>
+	<div id="panel">
+		Hello Panel...!!! <br />
+		Hello Panel...!!! <br />
+		Hello Panel...!!! <br />
+		Hello Panel...!!! <br />
+	</div>
+</body>
+</html>

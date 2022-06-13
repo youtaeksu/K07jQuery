@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+    $(function(){
+        //submit버튼을 클릭한 경우...
+        $('#submit').click(function(){
+            //form태그의 DOM을 얻어온다.
+            var f = document.getElementById("sForm");
+            //아이디와 패스워드의 입력값이 있는지 확인한다.
+            if(f.user_id.value==""){
+                alert("아이디를 입력하세요");
+                return false;
+            }
+            if(f.user_pw.value==""){
+                alert("패스워드를 입력하세요");
+                return false;
+            }
+            /*
+            attr() : 선택한 DOM객체에 속성을 부여하거나 읽어올때 사용한다.
+                아래는 <form> 태그에 method, action과 같은 속성을 부여한다.
+            */
+            $('#sForm').attr('method','post')
+                .attr('action','http://ikosmo.co.kr')
+                .attr('target','subTarget');
+        });
+    });
+    </script>
+</head>
+<body>
+    <h2>jQuery를 통해 폼값 전송하기</h2>
+	
+	<form id="sForm">
+		아이디 : <input type="text" name="user_id"/>
+		<br />
+		패스워드 : <input type="password" name="user_pw" />
+		<br />
+		<button type="submit" id="submit">로긴하기</button>
+	</form>
+	
+	<iframe name="subTarget" frameborder="1"
+		style="border:2px solid #000000; width:500px;
+		height:300px;"></iframe>
+</body>
+</html>

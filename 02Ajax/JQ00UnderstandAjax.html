@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>00UnderstandAjax.jsp</title>
+</head>
+<body>
+    <h2>Ajax 동작방식 이해하기</h2>
+    <script>
+        function formSubmit(f){
+            //전송방식 설정
+            f.method = "get";
+            //폼값이 전송될 타겟을 설정
+            f.target = "hiddenFrame";
+            //폼값을 전송할 URL설정
+            f.action = "./common/00Callback.html";
+            //폼값전송을 위해 누른 버튼이 submit 타입이 아닐때만 사용한다.
+            //현재 상태에서 submit()가 실행되면 폼값은 두번 전송되게 된다.
+            //f.submit();
+        }
+    </script>
+    <div id="callBackData">
+        콜백된 데이터는 여기에 출력합니다.
+    </div>
+
+    <form onsubmit="return formSubmit(this);">
+        <input type="submit" value="폼값 전송하기" />
+    </form>
+    <!-- 폼값은 여기로 전송된다. display속성이 none이면 웹브라우저에서는
+    보이지 않지만, 실제 폼값은 정상적으로 전송된다. -->
+    <iframe name="hiddenFrame" 
+        style="display:none; width:300px; height:300px;"></iframe>
+</body>
+</html>
